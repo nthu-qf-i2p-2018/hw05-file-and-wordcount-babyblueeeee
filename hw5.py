@@ -23,13 +23,16 @@ def main(filename):
        counter.update({ele:1})
    counters=sorted(counter.items(), key=lambda x: x[1],reverse=True)
    counters=dict(counters)
+   k=[]
+   for ele in counters:
+     k.append([ele,counters[ele]])
    with open('wordcount.csv', 'w', newline='') as csv_file:
      writer = csv.writer(csv_file,delimiter=",")
      writer.writerow(['word']+['count'])
      for ele in counters:
        writer.writerow([ele]+[counters[ele]])
    with open("wordcount.json",'w') as json_file:
-     json.dump(counters,json_file)
+     json.dump(k,json_file)
    with open("wordcount.pkl","wb") as pkl_file:
      pickle.dump(counters, pkl_file)
 
